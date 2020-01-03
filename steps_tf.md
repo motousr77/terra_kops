@@ -108,7 +108,7 @@ provider "aws" {
 # instance.tf
 resource "aws_instance" "TASK_SOME_NAME" {
   ami = "${lookup(var.AMIS, var.AWS_REGION)}"
-  tags = { Name = "UDEMY" }
+  tags = { Name = "TASK" }
   instance_type = "t2.micro"
   provisioner "local-exec" {
      command = "echo ${aws_instance.TASK_SOME_NAME.private_ip} >> private_ips.txt"
