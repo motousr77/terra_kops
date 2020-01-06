@@ -15,6 +15,83 @@ terraform --help plan
 ~~~
 _ from (downloads): https://www.terraform.io/downloads.html
 
+## Terraform in use
+Credential file 'terraform.tfvars' must have couple strings:
+~~~yml
+# ^ file_name: terraform.tfvars
+
+AWS_ACCESS_KEY="<SOME_HASH_CODE_KEY"
+AWS_SECRET_KEY="<some_hash_code_first_key/<some_hash_code_second_key"
+~~~
+I create one instance of EC2 from AMI by my terraform definition file (correct 0.12 version)
+\
+If you use some old version of definition file you can fix it by command
+~~~sh
+terraform init
+terraform 0.12upgrade
+~~~
+~~~py
+# ^ file_name: terraform.code.tf
+
+# vars.tf
+variable "AWS_ACCESS_KEY" {
+}
+
+variable "AWS_SECRET_KEY" {
+}
+
+variable "AWS_REGION" {
+  default = "us-east-2"
+}
+
+variable "AMIS" {
+  type = map(string)
+  default = {
+    # *******************************************
+    #   https://cloud-images.ubuntu.com/locator/ec2/
+    #   US East (Ohio) => us-east-2
+    #   OS        => Ubuntu Server 18.04 LTS (HVM), SSD Volume Type
+    #   AMI_ID    => ami-0d5d9d301c853a04a
+    #   AMI shortcut (AMAZON MACHINE IMAGE)
+    # *******************************************
+    us-east-2 = "ami-0d5d9d301c853a04a"
+  }
+}
+
+# provider.tf
+provider "aws" {
+  access_key = var.AWS_ACCESS_KEY
+  secret_key = var.AWS_SECRET_KEY
+  region     = var.AWS_REGION
+}
+
+# instance.tf
+resource "aws_instance" "TASK_SOME_NAME" {
+  ami = var.AMIS[var.AWS_REGION]
+  tags = {
+    Name = "TASK"
+  }
+  instance_type = "t2.micro"
+  provisioner "local-exec" {
+    command = "echo ${aws_instance.TASK_SOME_NAME.private_ip} >> private_ips.txt"
+  }
+}
+
+output "ip" {
+  value = aws_instance.TASK_SOME_NAME.public_ip
+}
+~~~
+After creating this file (terraform.code.tf) use commands
+~~~sh
+terraform init
+terraform apply
+# ^ to confirm/refuse type 'yes'/'no' in dialog
+~~~
+After this you can remove the instance(s) defined below:
+~~~sh
+terraform destroy
+# ^ to confirm/refuse type 'yes'/'no' in dialog
+~~~
 ## AWS CLI version 2
 The IAM user to create the Kubernetes cluster must have the following permissions:
 ~~~lst
