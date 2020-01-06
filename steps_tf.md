@@ -25,6 +25,18 @@ install_kubectl
 ~~~
 
 ## Install Kops commands
+Kops latest release Version 1.15 WORKING ONLY IN LINUX KERNEL Version LESS then 4.9 ~ Warning!!!
+\
+In this case use Snap installer where current Kops Version is 1.17.0-alpha.1
+~~~sh
+snap find kops
+sudo snap install kops
+~~~
+\
+And if you have kernel verssio 4+ ( uname -r ) do this
+\
+_link https://github.com/kubernetes/kops/blob/master/docs/install.md#linux
+\
 Kubernetes documentation: https://kubernetes.io/docs/getting-started-guides/kops/
 ~~~sh
 function install_kops {
