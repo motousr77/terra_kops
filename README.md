@@ -16,7 +16,7 @@ terraform --help plan
 _ from (downloads): https://www.terraform.io/downloads.html
 
 ## Terraform in use
-Credential file 'terraform.tfvars' must have couple strings:
+Credential file 'terraform.tfvars' must include couple strings:
 ~~~yml
 # ^ file_name: terraform.tfvars
 
@@ -85,12 +85,12 @@ After creating this file (terraform.code.tf) use commands
 ~~~sh
 terraform init
 terraform apply
-# ^ to confirm/refuse type 'yes'/'no' in dialog
+# ^ to confirm/refuse type yes/no in dialog
 ~~~
 After this you can remove the instance(s) defined below:
 ~~~sh
 terraform destroy
-# ^ to confirm/refuse type 'yes'/'no' in dialog
+# ^ to confirm/refuse type yes/no in dialog
 ~~~
 ## AWS CLI version 2
 The IAM user to create the Kubernetes cluster must have the following permissions:
