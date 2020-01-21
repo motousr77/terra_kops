@@ -24,7 +24,8 @@ AWS_ACCESS_KEY="<SOME_HASH_CODE_KEY"
 AWS_SECRET_KEY="<some_hash_code_of_the_secret_access_key"
 ~~~
 I create one instance of EC2 from AMI by my terraform definition file (correct 0.12 version)
-<br> If you use some old version of definition file you can fix it by command
+\
+If you use some old version of definition file you can fix it by command
 ~~~sh
 terraform init
 terraform 0.12upgrade
@@ -100,7 +101,8 @@ AmazonS3FullAccess
 IAMFullAccess
 AmazonVPCFullAccess
 ~~~
-<br>Installation AWS cli Version 2
+\
+Installation AWS cli Version 2
 ~~~sh
 curl "https://d1vvhvl2y92vvt.cloudfront.net/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
 unzip awscliv2.zip
@@ -110,16 +112,16 @@ aws2 help
 # ^ use alias fro simplest input: echo "alias aws='aws2'" >> ~/.bashrc
 ~~~
 _ from: https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html
-<br>After creating user on the AWS service (IAM users) do next:
+\After creating user on the AWS service (IAM users) do next:
 ~~~sh
 # ^ answer to the questions by input credentials and some fields 
 # ~ region: us-east-2, ~ output: json
 # ~ aws access key id: ...  ~ aws secret access key: ...
 aws2 configure --profile default && cat ~/.aws/*
 ~~~
-<br>
+\
 After this you will see output like this:
-~~~yml
+~~~yaml
 # ^ ~/.aws/config
 [default]
 region=us-east-2
@@ -130,7 +132,7 @@ output=json
 aws_access_key_id=<AWSACCESSKEYIDSTRING>
 aws_secret_access_key=<AWSSECRETACCESSKEYSTRING>
 ~~~
-<br>
+\
 Using Profiles with the AWS CLI
 ~~~sh
 # ^ describe the ec2 instances
@@ -142,9 +144,9 @@ aws ec2 describe-instances --profile user01 > ec2_inst_desc.json
 # ^ export user profile
 export AWS_PROFILE=user01
 ~~~
-<br>
+\
 For example aws cli can use more then one profile
-~~~yml
+~~~yaml
 [default]
 region=us-west-2
 output=json
