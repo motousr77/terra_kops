@@ -7,7 +7,7 @@ sudo mv terraform /usr/local/bin/
 terraform version
 echo "alias t='terraform'" >> $HOME/.bashrc
 ~~~
-\
+  
 Some helps
 ~~~sh
 terraform --help
@@ -21,11 +21,10 @@ Credential file 'terraform.tfvars' must include couple strings:
 # ^ file_name: terraform.tfvars
 
 AWS_ACCESS_KEY="<SOME_HASH_CODE_KEY"
-AWS_SECRET_KEY="<some_hash_code_first_key/<some_hash_code_second_key"
+AWS_SECRET_KEY="<some_hash_code_of_the_secret_access_key"
 ~~~
 I create one instance of EC2 from AMI by my terraform definition file (correct 0.12 version)
-\
-If you use some old version of definition file you can fix it by command
+<br> If you use some old version of definition file you can fix it by command
 ~~~sh
 terraform init
 terraform 0.12upgrade
@@ -101,8 +100,7 @@ AmazonS3FullAccess
 IAMFullAccess
 AmazonVPCFullAccess
 ~~~
-\
-Installation AWS cli Version 2
+<br>Installation AWS cli Version 2
 ~~~sh
 curl "https://d1vvhvl2y92vvt.cloudfront.net/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
 unzip awscliv2.zip
@@ -112,15 +110,14 @@ aws2 help
 # ^ use alias fro simplest input: echo "alias aws='aws2'" >> ~/.bashrc
 ~~~
 _ from: https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html
-\
-After creating user on the AWS service (IAM users) do next:
+<br>After creating user on the AWS service (IAM users) do next:
 ~~~sh
 # ^ answer to the questions by input credentials and some fields 
 # ~ region: us-east-2, ~ output: json
 # ~ aws access key id: ...  ~ aws secret access key: ...
 aws2 configure --profile default && cat ~/.aws/*
 ~~~
-\
+<br>
 After this you will see output like this:
 ~~~yml
 # ^ ~/.aws/config
@@ -133,7 +130,7 @@ output=json
 aws_access_key_id=<AWSACCESSKEYIDSTRING>
 aws_secret_access_key=<AWSSECRETACCESSKEYSTRING>
 ~~~
-\
+<br>
 Using Profiles with the AWS CLI
 ~~~sh
 # ^ describe the ec2 instances
@@ -145,7 +142,7 @@ aws ec2 describe-instances --profile user01 > ec2_inst_desc.json
 # ^ export user profile
 export AWS_PROFILE=user01
 ~~~
-\
+<br>
 For example aws cli can use more then one profile
 ~~~yml
 [default]
